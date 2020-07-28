@@ -1,0 +1,40 @@
+<html>
+<head>
+    <title>Character limit in a Textarea element with Counter</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        .form-control{
+            height: 10vw;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <br>
+        <form class="form-group">
+        <input type="textarea" id="myTextarea" class="form-control"></textarea>
+        <span id="textCounter" class="text-muted" style="font:15px Arial;">200 Characters limit</span>
+    </form>
+    </div>
+</body>
+
+<script>
+    $(document).ready(function() {
+        $('#myTextarea').on('input propertychange', function() {
+            CharLimit(this, 200);
+        });
+    });
+
+    function CharLimit(input, maxChar) {
+        var len = $(input).val().length;
+        $('#textCounter').text(maxChar - len + ' characters remaining');
+        
+        if (len > maxChar) {
+            $(input).val($(input).val().substring(0, maxChar));
+            $('#textCounter').text(0 + ' characters remaining');
+        }
+    }
+</script>
+</html>
